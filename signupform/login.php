@@ -61,19 +61,18 @@
 						function checkname($username, $pass)
 						{
 							include('PDO.php');
-							$sql = "select count(*) from user where  user_name = '$username' and password = '$pass'";
+							$sql = "select * from user where user_name = '$username' and password = '$pass'";
 							$data = $conn->prepare($sql);
 							$data->execute();
 							return $data->fetchColumn();
 						}
 						$result = checkname($username, $password);
 
-
 						if ($result == 0) {
 							echo "k ton tai user";
 							exit;
 						} else {
-							$_SESSION['username'] = $username;
+							$_SESSION['user_id'] = $result;
 							header("location:../userbackend/indexuserbackend.php");
 						}
 						//$query = mysqli_query($conn, $sql);

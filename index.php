@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +21,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
 	<?php include "./inc/header.html" ?>
 
@@ -34,7 +36,7 @@
 
 				<div class="feature_option">
 					<p class="text-2xl font-semibold text-gray-500">Tìm Kiếm Nhanh</p>
-					<form action="#">				
+					<form action="#">
 						<input type="text" placeholder="Nhập từ khóa ....">
 
 						<select>
@@ -273,7 +275,7 @@
 	<div class="trending_product py-16">
 		<div class="container mx-auto">
 			<div class="text-center relative mb-10">
-				<span class="main_title">phòng trọ  <span class="text-red-500 font-bold">đang sales</span></span>
+				<span class="main_title">phòng trọ <span class="text-red-500 font-bold">đang sales</span></span>
 			</div>
 
 			<div class="grid grid-cols-12 gap-10">
@@ -354,7 +356,7 @@
 
 			<div class="owl-carousel owl-theme">
 				<div class="item">
-					<div  class="item_user">
+					<div class="item_user">
 						<img src="./assets/images/users/user1.png" alt="" class="w-full rounded-full">
 					</div>
 					<div class="review_content">
@@ -384,7 +386,7 @@
 				</div>
 
 				<div class="item">
-					<div  class="item_user">
+					<div class="item_user">
 						<img src="./assets/images/users/user2.png" alt="" class="w-full rounded-full">
 					</div>
 					<div class="review_content">
@@ -411,4 +413,5 @@
 		})
 	</script>
 </body>
+
 </html>

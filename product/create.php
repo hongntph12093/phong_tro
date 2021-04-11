@@ -5,35 +5,33 @@
 ob_start();
 session_start();
 include "dbname.php";
-if (isset($_SESSION['user_id'])) {
-    $user = $_SESSION['user_id'];
-    $sql = "select * from user where user_id = '$user'";
-    $result = $conn->query($sql)->fetch();
-}
 
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $sql = "select * from user where user_id = '$user_id'";
+    $result = $pdo->query($sql)->fetch();
+}
 
 $pdo = new PDO('mysql:host=localhost;port=3306;dbname=phongtro', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $errors = [];
 
 $room_name = '';
-$loca_name = '';
-$cate_name = '';
+$loca_id = '';
+$cate_id = '';
 $address = '';
 $price = '';
 $area = '';
 $summary = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     $room_name = $_POST['room_name'];
-    $loca_name = $_POST['loca_name'];
-    $cate_name = $_POST['cate_name'];
+    $loca_id = $_POST['loca_id'];
+    $cate_id = $_POST['cate_id'];
     $address = $_POST['address'];
     $price = $_POST['price'];
     $area = $_POST['area'];
     $summary = $_POST['summary'];
-
 
     /*   $image = $_FILES['image'] ?? null;
     $imagePath = '';
@@ -55,22 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$price) {
         $errors[] = 'Product price is required';
     }
-
+    //    echo '$user: ' . $user . '<br />';
+    //return;
     if (empty($errors)) {
-        $statement = $pdo->prepare("INSERT INTO room (room_name, address, price, area, summary,user_id,loca_id,cate_id)
-                VALUES (:room_name, :address, :price, :area, :summary, :user_id, :loca_id,:cate_id)");
+        $statement = $pdo->prepare("INSERT INTO room (room_name, address, price, area, summary, user_id, loca_id, cate_id)
+                VALUES (:room_name, :address, :price, :area, :summary, :user_id, :loca_id, :cate_id)");
         $statement->bindValue(':room_name', $room_name);
         $statement->bindValue(':address', $address);
         $statement->bindValue(':price', $price);
         $statement->bindValue(':area', $area);
         $statement->bindValue(':summary', $summary);
-        $statement->bindValue(':user_id', '4');
-        $statement->bindValue(':loca_id', $loca_name);
-        $statement->bindValue(':cate_id', $cate_name);
-
-
-
-
+        $statement->bindValue(':user_id', $user_id);
+        $statement->bindValue(':loca_id', $loca_id);
+        $statement->bindValue(':cate_id', $cate_id);
         $statement->execute();
 
         header('Location: index.php');
@@ -113,9 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="room_name" class="form-control" value="<?php echo $room_name ?>">
         </div>
         <div class="form-group">
-            <label>address</label>
+            <label>location</label>
 
-            <select name="loca_name" class="form-control" id="">
+            <select name="loca_id" class="form-control" id="">
                 <?php
                 include 'dbname.php';
                 $sql = "select*from location ";
@@ -128,14 +123,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="form-group">
             <label>address</label>
-            <select name="cate_name" class="form-control" id="">
+            <select name="cate_id" class="form-control" id="">
                 <?php
                 include 'dbname.php';
                 $sql = "select*from category";
                 $kq = $pdo->query($sql);
                 foreach ($kq as $key => $row) {
                 ?>
-                    <option name="cate_name" value="<?php echo $row['cate_name'] ?>"> <?php echo $row['cate_name'] ?></option>
+                    <option name="cate_name" value="<?php echo $row['cate_id'] ?>"> <?php echo $row['cate_name'] ?></option>
                 <?php } ?>
             </select>
         </div>
